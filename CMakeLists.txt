@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(acados_vendor_ros2)
 
-set(ACADOS_VERSION "0.5.0")
+set(ACADOS_VERSION "0.5.1")
 
 # CMake options
 option(FORCE_BUILD_VENDOR_PKG
@@ -87,10 +87,20 @@ if(${BUILD_ACADOS_TEMPLATE})
   set(TERA_RENDERER_BUILD "${CMAKE_BINARY_DIR}/t_renderer")
 
   if(NOT EXISTS "${TERA_RENDERER}")
-    set(TERA_VERSION "0.0.34")
+    set(TERA_VERSION "0.2.0")
     set(TERA_URL_BASE "https://github.com/acados/tera_renderer")
-    set(TERA_URL "${TERA_URL_BASE}/releases/download/v${TERA_VERSION}/t_renderer-v${TERA_VERSION}-linux")
-    message(STATUS "Tera renderer not found, downloading version ${TERA_VERSION} from ${TERA_URL}")
+
+    # Detect system architecture
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
+      set(ARCH_SUFFIX "amd64")
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
+      set(ARCH_SUFFIX "arm64")
+    else()
+      message(FATAL_ERROR "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}")
+    endif()
+
+    set(TERA_URL "${TERA_URL_BASE}/releases/download/v${TERA_VERSION}/t_renderer-v${TERA_VERSION}-linux-${ARCH_SUFFIX}")
+    message(STATUS "Tera renderer not found, downloading version ${TERA_VERSION} for ${ARCH_SUFFIX} from ${TERA_URL}")
 
     # Download binaries for the tera renderer to build directory
     file(DOWNLOAD
