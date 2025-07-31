@@ -84,18 +84,18 @@ if(${BUILD_ACADOS_TEMPLATE})
   )
 
   set(TERA_RENDERER "${ACADOS_SOURCE_DIR}/bin/t_renderer")
+  set(TERA_RENDERER_BUILD "${CMAKE_BINARY_DIR}/t_renderer")
+
   if(NOT EXISTS "${TERA_RENDERER}")
-    # Add empty bin directory (used to download the tera renderer)
-    install(DIRECTORY DESTINATION "opt/${PROJECT_NAME}/bin")
     set(TERA_VERSION "0.0.34")
     set(TERA_URL_BASE "https://github.com/acados/tera_renderer")
     set(TERA_URL "${TERA_URL_BASE}/releases/download/v${TERA_VERSION}/t_renderer-v${TERA_VERSION}-linux")
     message(STATUS "Tera renderer not found, downloading version ${TERA_VERSION} from ${TERA_URL}")
 
-    # Download binaries for the tera renderer
+    # Download binaries for the tera renderer to build directory
     file(DOWNLOAD
       "${TERA_URL}"
-      "${TERA_RENDERER}"
+      "${TERA_RENDERER_BUILD}"
       SHOW_PROGRESS
       STATUS TERA_DOWNLOAD_STATUS
     )
@@ -106,13 +106,17 @@ if(${BUILD_ACADOS_TEMPLATE})
 
     # Make the tera renderer executable
     file(CHMOD
-      ${TERA_RENDERER}
+      ${TERA_RENDERER_BUILD}
       PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
         WORLD_READ WORLD_EXECUTE
     )
   endif()
+
+  # Install the downloaded tera renderer (unsure if this is needed?)
+  install(PROGRAMS ${TERA_RENDERER_BUILD} DESTINATION "bin" RENAME "t_renderer")
+
 endif()
 ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/${PROJECT_NAME}.sh.in")
 
