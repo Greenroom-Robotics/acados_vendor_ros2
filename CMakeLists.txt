@@ -138,6 +138,15 @@ endif()
 # Export 'FindAcados.cmake'
 install(DIRECTORY cmake DESTINATION share/${PROJECT_NAME})
 
+# Install Python project files
+install(
+  FILES
+    pyproject.toml
+    poetry.lock
+  DESTINATION
+    share/${PROJECT_NAME}
+)
+
 # Copy additional cmake utils required by Acados
 #  (to suppress findPackage warnings in downstream packages)
 install(
