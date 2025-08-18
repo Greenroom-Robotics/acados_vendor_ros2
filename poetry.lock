@@ -65,6 +65,21 @@ files = [
 numpy = "*"
 
 [[package]]
+name = "future-fstrings"
+version = "1.2.0"
+description = "A backport of fstrings to python<3.6"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+groups = ["main"]
+files = [
+    {file = "future_fstrings-1.2.0-py2.py3-none-any.whl", hash = "sha256:90e49598b553d8746c4dc7d9442e0359d038c3039d802c91c0a55505da318c63"},
+    {file = "future_fstrings-1.2.0.tar.gz", hash = "sha256:6cf41cbe97c398ab5a81168ce0dbb8ad95862d3caf23c21e4430627b90844089"},
+]
+
+[package.extras]
+rewrite = ["tokenize-rt (>=3)"]
+
+[[package]]
 name = "numpy"
 version = "2.2.6"
 description = "Fundamental package for array computing in Python"
@@ -132,4 +147,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10"
-content-hash = "07948a7aff91c5e83174042758b30b6c2d3d0ab2f99b1e1ce930b4cdcf58946b"
+content-hash = "05cb660df690d676d51fa76a770f8cea3a1130b1c808040572a193c228446683"

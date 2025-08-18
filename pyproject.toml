@@ -7,6 +7,7 @@ authors = ["Nathan Edwards <nathan.edwards@greenroomrobotics.com>"]
 [tool.poetry.dependencies]
 python = ">=3.10"
 casadi = "^3.7.1"
+future-fstrings = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 
