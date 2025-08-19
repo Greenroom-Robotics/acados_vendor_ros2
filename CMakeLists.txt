@@ -125,7 +125,7 @@ if(${BUILD_ACADOS_TEMPLATE})
   endif()
 
   # Install the downloaded tera renderer (unsure if this is needed?)
-  install(PROGRAMS ${TERA_RENDERER_BUILD} DESTINATION "bin" RENAME "t_renderer")
+  install(PROGRAMS ${TERA_RENDERER_BUILD} DESTINATION "opt/acados_vendor_ros2/bin" RENAME "t_renderer")
 
 endif()
 ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/${PROJECT_NAME}.sh.in")
